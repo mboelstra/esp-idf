@@ -190,8 +190,9 @@ void IRAM_ATTR call_start_cpu0(void)
         ESP_EARLY_LOGE(TAG, "Failed to init external RAM!");
         abort();
 #endif
+    } else {
+      esp_spiram_init_cache();
     }
-    esp_spiram_init_cache();
 #endif
 
     ESP_EARLY_LOGI(TAG, "Pro cpu up.");
