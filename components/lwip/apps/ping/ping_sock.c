@@ -83,7 +83,7 @@ static esp_err_t esp_ping_send(esp_ping_t *ep)
     if (ep->packet_hdr->type == ICMP_ECHO) {
         ep->packet_hdr->chksum = inet_chksum(ep->packet_hdr, ep->icmp_pkt_size);
     }
-    
+
     int sent = sendto(ep->sock, ep->packet_hdr, ep->icmp_pkt_size, 0,
                       (struct sockaddr *)&ep->target_addr, sizeof(ep->target_addr));
 
@@ -259,7 +259,7 @@ esp_err_t esp_ping_new_session(const esp_ping_config_t *config, const esp_ping_c
         if(netif_index_to_name(config->interface, iface.ifr_name) == NULL) {
           goto err;
         }
-        if(setsockopt(ep->sock, SOL_SOCKET, SO_BINDTODEVICE, &iface, sizeof(iface) !=0)) {
+        if(setsockopt(ep->sock, SOL_SOCKET, SO_BINDTODEVICE, &iface, sizeof(iface)) !=0) {
           goto err;
         }
     }
